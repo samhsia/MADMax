@@ -59,7 +59,8 @@ def import_task(model, system, task_cfg_file):
         from tasks.dlrm_moe_tasks import DLRM_MoE_Task
         task = DLRM_MoE_Task(model, system, task_cfg)
     elif model.type == 'LLM':
-        from tasks.llm_tasks_old import LLM_Task
+        # Note that this is before optimizing FSDP prefetch communication. TODO: Adding optimized FSDP configuration.
+        from tasks.llm_tasks_preoptimized import LLM_Task 
         task = LLM_Task(model, system, task_cfg)
     elif model.type == 'LLM_MoE':
         from tasks.llm_moe_tasks import LLM_MoE_Task
@@ -79,7 +80,7 @@ def parse_configurations():
     # Configuration Arguments
     parser.add_argument('--model-cfg-file', type=str, default='model_cfgs/dlrm/dlrm_a.json', help='Model architecture configuration file.')
     parser.add_argument('--system-cfg-file', type=str, default='system_cfgs/zionex/zionex_128.json', help='System configuration file.')
-    parser.add_argument('--task-cfg-file', type=str, default='task_cfgs/dlrm_train.json', help='Task configuration file.')
+    parser.add_argument('--task-cfg-file', type=str, default='task_cfgs/dlrm/dlrm_train.json', help='Task configuration file.')
     parser.add_argument('--figures-dir', type=str, default='figures/', help='Directory to save figures.')
 
     return parser.parse_args()
