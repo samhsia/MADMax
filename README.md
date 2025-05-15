@@ -1,29 +1,59 @@
-# MADMax
+## This repository has been archived. MADMax development and support has migrated under [ScaleExplorer]([https://github.com/inclusionAI/AReaL](https://github.com/facebookresearch/ScaleExplorer)).
 
-This repository is for open-sourcing and artifact evaluation of the International Symposium on Computer Architecture (ISCA) 2024 paper **MAD Max Beyond Single-Node: Enabling Large Machine Learning Model Acceleration on Distributed Systems**.
+# MADMax: Distributed Machine Learning Model Acceleration
+
+This repository is for open-sourcing of the International Symposium on Computer Architecture (ISCA) 2024 paper **MAD Max Beyond Single-Node: Enabling Large Machine Learning Model Acceleration on Distributed Systems**.
 
 ## Setup
+```
+# Run the setup script
+./setup.sh
 
-Run `./setup.sh`
+# Create and activate conda environment
+conda create -n madmax python=3.9
+conda activate madmax
 
-## Functional Tests
+# Install dependencies
+pip install -r requirements.txt
+```
 
-For a DLRM example, run `python run_model.py`.
+## Running Examples
 
-For an LLM example, run `python run_model.py --model-cfg-file 'model_cfgs/llm/llama2_70b.json' --system-cfg-file 'system_cfgs/dc_a/dc_a_2048.json' --task-cfg-file 'task_cfgs/llm/llm_train.json'`
+### DLRM Example
+```
+python run_model.py
+```
 
-For each example, make sure that you are able to see printed outputs that end with `**************************************************`.
+### LLM Example
+```
+python run_model.py --model-cfg-file 'model_cfgs/llm/llama2_70b.json' \
+                    --system-cfg-file 'system_cfgs/dc_a/dc_a_2048.json' \
+                    --task-cfg-file 'task_cfgs/llm/llm_train.json'
+```
 
-## Artifact Evaluation
+Successful runs will display output ending with `**************************************************`.
 
-The two main folders for artifact evaluation are:
+## Repository Structure
+- `model_cfgs/`: Model architecture configurations
+- `models/`: Model implementation code
+- `system_cfgs/`: Distributed system configurations
+- `systems/`: System implementation code
+- `task_cfgs/`: Task configurations
+- `tasks/`: Task execution workload descriptions
+- `run_model.py`: Main simulation entry point
 
-- `artfiact_notebooks` - Jupyter Notebooks used for launching experiments to recreate performance model results
-  - `[0] Cloud Provider Launcher.ipynb` - paper Figures 1 and 16
-  - `[1] DLRM A Validation.ipynb` - paper Figure 7
+## Citation
+Please cite [our ISCA'24 paper](https://arxiv.org/abs/2310.02784) as:
 
-- `artifact_sheets` - Microsoft Excel sheets that contain organized data of experiment results
-  - `[A] Cloud Provider Results.xlsx` - paper Figures 1 and 16
-
-## Codebase Structure
-
+``` bibtex
+@INPROCEEDINGS{hsia2024madmax,
+  author={Hsia, Samuel and Golden, Alicia and Acun, Bilge and Ardalani, Newsha and DeVito, Zachary and Wei, Gu-Yeon and Brooks, David and Wu, Carole-Jean},
+  booktitle={2024 ACM/IEEE 51st Annual International Symposium on Computer Architecture (ISCA)}, 
+  title={MAD-Max Beyond Single-Node: Enabling Large Machine Learning Model Acceleration on Distributed Systems}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={818-833},
+  doi={10.1109/ISCA59077.2024.00064}
+}
+```
